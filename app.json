@@ -15,7 +15,13 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.codetracers.pulsetrack",
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch", "bluetooth-central", "bluetooth-peripheral", "audio"],
+        "UIBackgroundModes": [
+          "location",
+          "fetch",
+          "bluetooth-central",
+          "bluetooth-peripheral",
+          "audio"
+        ],
         "NSBluetoothAlwaysUsageDescription": "PulseTrack requires Bluetooth to maintain an emergency P2P mesh during total communications blackout.",
         "NSBluetoothPeripheralUsageDescription": "PulseTrack advertises an emergency beacon to nearby devices.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "PulseTrack requires location to broadcast rescue coordinates.",
@@ -55,7 +61,10 @@
         "react-native-ble-plx",
         {
           "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
+          "modes": [
+            "peripheral",
+            "central"
+          ],
           "bluetoothAlwaysPermission": "PulseTrack uses Bluetooth to form an ad-hoc emergency survival mesh when internet collapses."
         }
       ],
@@ -71,6 +80,11 @@
           "cameraPermission": "PulseTrack requires camera access to document disaster damage for rescue teams."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "36c4c796-cedf-4c99-a242-85159ade9d0e"
+      }
+    }
   }
 }

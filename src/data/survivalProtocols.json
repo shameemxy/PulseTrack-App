@@ -1,0 +1,142 @@
+[
+  {
+    "id": "proto-earthquake",
+    "category": "earthquake",
+    "title": "Earthquake: Drop, Cover, and Hold On",
+    "summary": "Immediate protocol during violent seismic shaking. Do not run outside during shaking.",
+    "criticalSteps": [
+      "DROP to your hands and knees immediately to prevent being knocked down.",
+      "COVER your head and neck under a sturdy table, desk, or against an interior wall.",
+      "HOLD ON to your shelter until shaking stops completely.",
+      "If in bed, stay there, curl face down, and cover your head with a pillow.",
+      "Beware of aftershocks, which often follow within 10 to 60 minutes."
+    ],
+    "dos": [
+      "Move away from windows, heavy mirrors, hanging lamps, and tall furniture.",
+      "If outdoors, move to an open area away from power lines, buildings, and sinkholes.",
+      "Turn off gas and main electricity breakers if you smell gas or see sparks."
+    ],
+    "donts": [
+      "DO NOT use elevators under any circumstances.",
+      "DO NOT stand in a doorway; modern doorways are not reinforced shelters.",
+      "DO NOT run outside while shaking is occurring; falling facade glass is the #1 killer."
+    ],
+    "tags": ["earthquake", "seismic", "shaking", "collapse", "rubble", "tremor"]
+  },
+  {
+    "id": "proto-collapse",
+    "category": "collapse",
+    "title": "Structural Collapse & Trapped Victim Protocol",
+    "summary": "Survival tactics when pinned, trapped under concrete rubble, or in void spaces.",
+    "criticalSteps": [
+      "Protect your airway: Cover nose and mouth with cloth, shirt, or handkerchief to filter silica dust.",
+      "Conserve oxygen: Slow your breathing. Panic consumes limited pocket air 3x faster.",
+      "Avoid continuous shouting; shout only when you hear search teams or rescue dogs nearby.",
+      "Tap rhythmically on metal pipes, beams, or concrete in sets of 3 (SOS signal: tap-tap-tap).",
+      "Activate PulseTrack BLE Mesh or SOS siren beacon if phone is reachable."
+    ],
+    "dos": [
+      "Inspect your immediate surroundings for secondary collapse hazards.",
+      "Keep phone screen brightness at absolute minimum or activate Stealth Mode to preserve battery.",
+      "Bandage active bleeding immediately using torn clothing as a tourniquet or pressure wrap."
+    ],
+    "donts": [
+      "DO NOT ignite matches, lighters, or open flames; gas pockets may ignite.",
+      "DO NOT kick violently against heavy support pillars; you may trigger a roof pancake.",
+      "DO NOT waste your voice shouting continuously when no search sounds are audible."
+    ],
+    "tags": ["trapped", "collapse", "rubble", "void", "silica", "buried", "airway"]
+  },
+  {
+    "id": "proto-flood",
+    "category": "flood",
+    "title": "Flash Flood & Tsunami Evacuation",
+    "summary": "Rapid rising water protocol. Water 15cm deep can sweep an adult off their feet.",
+    "criticalSteps": [
+      "Immediately move to higher ground or upper floor; never stay in basements or subterranean garages.",
+      "Turn off gas and main circuit breakers before water infiltrates the building.",
+      "If trapped in a building, climb to the roof. Do not climb into a closed attic without an exit tool.",
+      "Never drive into floodwaters: Turn Around, Don't Drown. 30cm of moving water floats most cars."
+    ],
+    "dos": [
+      "Wear life jackets or carry buoyant objects (coolers, sealed empty plastic containers).",
+      "Stay informed via battery-powered emergency radios or PulseTrack offline alerts.",
+      "Signal rescuers with bright colored cloth or flashing phone torch from the rooftop."
+    ],
+    "donts": [
+      "DO NOT attempt to walk through fast-moving water.",
+      "DO NOT touch downed electrical wires or submerged appliances.",
+      "DO NOT return to your home until authorities confirm structural safety."
+    ],
+    "tags": ["flood", "tsunami", "water", "drowning", "rising water", "evacuate"]
+  },
+  {
+    "id": "proto-fire",
+    "category": "fire",
+    "title": "High-Rise Fire & Smoke Infiltration",
+    "summary": "Smoke inhalation kills faster than flames. Stay low beneath the thermal toxic layer.",
+    "criticalSteps": [
+      "Drop to your hands and knees: clean air remains within 30cm of the floor.",
+      "Feel door handles with the back of your hand. If hot, DO NOT open the door.",
+      "If path is clear, evacuate via emergency fire stairwells. Close doors behind you to compartmentalize fire.",
+      "If trapped in a room, seal door cracks and vents with wet towels, sheets, or duct tape."
+    ],
+    "dos": [
+      "Breathe through a wet cotton cloth to cool air and trap soot particles.",
+      "Hang a bright cloth or sheet out the window to signal ladder trucks.",
+      "Call emergency services (112 / 911) and inform them of your exact floor and room number."
+    ],
+    "donts": [
+      "DO NOT use elevators; electrical failure could trap you in the shaft.",
+      "DO NOT break windows unless absolutely necessary; opening windows introduces oxygen and draws smoke.",
+      "DO NOT re-enter a burning building for pets or personal possessions."
+    ],
+    "tags": ["fire", "smoke", "high-rise", "burn", "toxic smoke", "stairwell"]
+  },
+  {
+    "id": "proto-hostile",
+    "category": "hostile",
+    "title": "Active Threat & Hostile Encounter (Run, Hide, Fight)",
+    "summary": "Tactical survival guidelines during an active shooter, armed assailant, or urban unrest.",
+    "criticalSteps": [
+      "RUN: If there is an accessible escape path, evacuate immediately. Leave belongings behind.",
+      "HIDE: If escape is impossible, lock and barricade the door with heavy furniture.",
+      "STEALTH: Mute your phone completely, turn off vibration, switch PulseTrack to OLED Stealth Mode.",
+      "FIGHT: As an absolute last resort when your life is in imminent danger, act aggressively to incapacitate the threat."
+    ],
+    "dos": [
+      "Stay low, away from windows, doors, and sightlines.",
+      "Spread out if with others; do not huddle together in a cluster.",
+      "Keep hands visible, palms open, and fingers spread when law enforcement arrives."
+    ],
+    "donts": [
+      "DO NOT make sudden movements toward officers or point at them.",
+      "DO NOT make any noise, ringtone, or screen flash while in concealment.",
+      "DO NOT open the door for anyone until official security forces are clearly confirmed."
+    ],
+    "tags": ["hostile", "shooter", "stealth", "threat", "lockdown", "barricade", "danger"]
+  },
+  {
+    "id": "proto-medical",
+    "category": "medical",
+    "title": "Trauma First Aid: Hemorrhage Control & CPR",
+    "summary": "Stopping severe arterial bleeding and maintaining cardiac perfusion until medics arrive.",
+    "criticalSteps": [
+      "Check responsiveness and breathing: If unresponsive with no normal breathing, begin CPR immediately.",
+      "CPR: Push hard and fast in center of chest (100-120 bpm, 5cm deep) to the beat of 'Stayin' Alive'.",
+      "Arterial Bleeding: Apply direct, hard pressure directly onto the wound with sterile gauze or clean cloth.",
+      "Tourniquet: For catastrophic limb bleeding, place 5-7cm above wound (never over a joint). Tighten windlass until bleeding stops."
+    ],
+    "dos": [
+      "Pack deep penetrating wounds with clean cloth or gauze before applying pressure.",
+      "Keep the victim warm with blankets or clothing to prevent hypothermia and coagulopathy.",
+      "Note the exact time a tourniquet was applied on the patient's forehead (e.g. 'TK 14:30')."
+    ],
+    "donts": [
+      "DO NOT loosen or remove a tourniquet once applied; only hospital surgeons should remove it.",
+      "DO NOT remove embedded foreign objects (knives, glass shards); stabilize them in place.",
+      "DO NOT give food or drink to an unconscious victim or someone needing surgery."
+    ],
+    "tags": ["medical", "first aid", "bleeding", "cpr", "tourniquet", "hemorrhage", "injury", "fracture"]
+  }
+]

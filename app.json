@@ -79,7 +79,8 @@
         {
           "cameraPermission": "PulseTrack requires camera access to document disaster damage for rescue teams."
         }
-      ]
+      ],
+      "expo-audio"
     ],
     "extra": {
       "eas": {

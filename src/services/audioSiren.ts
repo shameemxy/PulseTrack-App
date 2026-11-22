@@ -1,17 +1,18 @@
-import { Audio } from 'expo-av';
+import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
 import { useEmergencyStore } from '../stores/useEmergencyStore';
 
 class AudioSirenService {
-  private sound: Audio.Sound | null = null;
+  private player: AudioPlayer | null = null;
   private isConfigured: boolean = false;
 
   private async configureAudioRouting(): Promise<void> {
     try {
-      await Audio.setAudioModeAsync({
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: true,
-        shouldDuckAndroid: false,
-        playThroughEarpieceAndroid: false, // Forces main bottom loudspeaker
+      await setAudioModeAsync({
+        playsInSilentMode: true,
+        shouldPlayInBackground: true,
+        shouldRouteThroughEarpiece: false, // Forces main bottom loudspeaker
+        allowsRecording: false,
+        interruptionMode: 'doNotMix',
       });
       this.isConfigured = true;
     } catch (e) {
@@ -37,23 +38,22 @@ class AudioSirenService {
     }
 
     try {
-      if (this.sound) {
-        await this.sound.stopAsync();
-        await this.sound.unloadAsync();
+      if (this.player) {
+        this.player.pause();
+        this.player.remove();
+        this.player = null;
       }
 
-      // High-frequency 3000Hz acoustic emergency beacon synthesized tone
-      // In production assets/audio/siren_3000hz.mp3 is loaded; here we generate or use remote/local sound
-      const { sound } = await Audio.Sound.createAsync(
-        { uri: 'https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg' },
-        {
-          shouldPlay: true,
-          isLooping: true,
-          volume: 1.0, // Force maximum gain
-        }
-      );
+      // Note: iOS AVPlayer does not play .ogg natively; swap to a local .mp3/.wav in assets/ for iOS siren audio
+      const player = createAudioPlayer({
+        uri: 'https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg',
+      });
 
-      this.sound = sound;
+      player.loop = true;
+      player.volume = 1.0; // Force maximum gain
+      player.play();
+
+      this.player = player;
       setSirenRinging(true);
     } catch (err) {
       console.warn('[PulseTrack Audio] Siren playback error:', err);
@@ -63,10 +63,10 @@ class AudioSirenService {
   public async stopSiren(): Promise<void> {
     const { setSirenRinging } = useEmergencyStore.getState();
     try {
-      if (this.sound) {
-        await this.sound.stopAsync();
-        await this.sound.unloadAsync();
-        this.sound = null;
+      if (this.player) {
+        this.player.pause();
+        this.player.remove();
+        this.player = null;
       }
     } catch (err) {
       console.warn('[PulseTrack Audio] Error stopping siren:', err);

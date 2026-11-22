@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Audio } from 'expo-av';
+import {
+  useAudioRecorder,
+  AudioModule,
+  RecordingPresets,
+  setAudioModeAsync,
+} from 'expo-audio';
 import { useEmergencyStore } from '../../stores/useEmergencyStore';
 import { useAppStore } from '../../stores/useAppStore';
 import { getThemeColors } from '../../theme/colors';
@@ -14,41 +19,26 @@ export const MediaStateMachine: React.FC = () => {
   const theme = useAppStore((state) => state.theme);
   const colors = getThemeColors(theme);
 
-  const [recording, setRecording] = useState<Audio.Recording | null>(null);
+  // Aggressive compression preset (24 kbps mono to fit free-tier storage)
+  const audioRecorder = useAudioRecorder({
+    ...RecordingPresets.LOW_QUALITY,
+    sampleRate: 16000,
+    numberOfChannels: 1,
+    bitRate: 24000,
+  });
 
   const startVoiceBeacon = async () => {
     try {
-      const permission = await Audio.requestPermissionsAsync();
+      const permission = await AudioModule.requestRecordingPermissionsAsync();
       if (!permission.granted) return;
 
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
+      await setAudioModeAsync({
+        allowsRecording: true,
+        playsInSilentMode: true,
       });
 
-      // Aggressive compression audio preset (low bitrate to fit in free tier storage)
-      const recordingObject = new Audio.Recording();
-      await recordingObject.prepareToRecordAsync({
-        android: {
-          extension: '.m4a',
-          outputFormat: Audio.AndroidOutputFormat.MPEG_4,
-          audioEncoder: Audio.AndroidAudioEncoder.AAC,
-          sampleRate: 16000,
-          numberOfChannels: 1,
-          bitRate: 24000, // 24 kbps ultra-compressed
-        },
-        ios: {
-          extension: '.m4a',
-          audioQuality: Audio.IOSAudioQuality.MIN,
-          sampleRate: 16000,
-          numberOfChannels: 1,
-          bitRate: 24000,
-        },
-        web: {},
-      });
-
-      await recordingObject.startAsync();
-      setRecording(recordingObject);
+      await audioRecorder.prepareToRecordAsync();
+      audioRecorder.record();
       setMediaStatus('recording');
     } catch (err) {
       console.warn('Failed to start recording', err);
@@ -57,13 +47,10 @@ export const MediaStateMachine: React.FC = () => {
   };
 
   const stopAndUploadVoiceBeacon = async () => {
-    if (!recording) return;
-
     try {
       setMediaStatus('compressing');
-      await recording.stopAndUnloadAsync();
-      const uri = recording.getURI();
-      setRecording(null);
+      await audioRecorder.stop();
+      const uri = audioRecorder.uri;
       setRecordedAudioUri(uri);
 
       // Simulate compressed upload sequence to Supabase Storage bucket 'emergency_media'

@@ -2,6 +2,7 @@
   "expo": {
     "name": "PulseTrack",
     "slug": "pulsetrack",
+    "scheme": "pulsetrack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,12 +23,12 @@
           "bluetooth-peripheral",
           "audio"
         ],
-        "NSBluetoothAlwaysUsageDescription": "PulseTrack requires Bluetooth to maintain an emergency P2P mesh during total communications blackout.",
+        "NSBluetoothAlwaysUsageDescription": "PulseTrack uses Bluetooth to reach nearby PulseTrack devices when mobile networks are down.",
         "NSBluetoothPeripheralUsageDescription": "PulseTrack advertises an emergency beacon to nearby devices.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "PulseTrack requires location to broadcast rescue coordinates.",
-        "NSLocationWhenInUseUsageDescription": "PulseTrack needs your location to display disaster maps.",
-        "NSMicrophoneUsageDescription": "PulseTrack samples ambient sound levels to detect structural collapse.",
-        "NSCameraUsageDescription": "PulseTrack captures incident evidence to send to triage responders."
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "PulseTrack uses your location to send rescue coordinates during an emergency.",
+        "NSLocationWhenInUseUsageDescription": "PulseTrack uses your location to show your position and send it with an alert.",
+        "NSMicrophoneUsageDescription": "PulseTrack records a short voice clip during an emergency and measures ambient sound to detect a structural collapse.",
+        "NSCameraUsageDescription": "PulseTrack captures photo or video evidence during an emergency for responders."
       }
     },
     "android": {
@@ -38,8 +39,6 @@
       "package": "com.codetracers.pulsetrack",
       "permissions": [
         "android.permission.SEND_SMS",
-        "android.permission.RECEIVE_SMS",
-        "android.permission.READ_PHONE_STATE",
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
@@ -53,7 +52,8 @@
         "android.permission.CAMERA",
         "android.permission.WAKE_LOCK",
         "android.permission.FOREGROUND_SERVICE",
-        "android.permission.FOREGROUND_SERVICE_LOCATION"
+        "android.permission.FOREGROUND_SERVICE_LOCATION",
+        "android.permission.POST_NOTIFICATIONS"
       ]
     },
     "plugins": [
@@ -65,22 +65,29 @@
             "peripheral",
             "central"
           ],
-          "bluetoothAlwaysPermission": "PulseTrack uses Bluetooth to form an ad-hoc emergency survival mesh when internet collapses."
+          "bluetoothAlwaysPermission": "PulseTrack uses Bluetooth to reach nearby PulseTrack devices when mobile networks are down."
         }
       ],
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "PulseTrack requires location to send your rescue beacon."
+          "locationAlwaysAndWhenInUsePermission": "PulseTrack uses your location to send rescue coordinates during an emergency."
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "PulseTrack requires camera access to document disaster damage for rescue teams."
+          "cameraPermission": "PulseTrack captures photo or video evidence during an emergency for responders.",
+          "microphonePermission": "PulseTrack records audio with emergency video clips."
         }
       ],
-      "expo-audio"
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "PulseTrack records a short voice clip during an emergency and measures ambient sound to detect a structural collapse."
+        }
+      ],
+      "expo-notifications"
     ],
     "extra": {
       "eas": {

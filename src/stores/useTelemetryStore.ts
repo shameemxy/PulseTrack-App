@@ -1,15 +1,20 @@
 import { create } from 'zustand';
 
+/**
+ * Sensor readings. Battery and noise are null until a real reading exists.
+ * Noise stays null until real microphone metering is implemented (Phase 3);
+ * the previous build fabricated dB values from the accelerometer.
+ */
 interface TelemetryState {
   currentImpactG: number;
-  currentNoiseDb: number;
+  currentNoiseDb: number | null;
   impactThresholdG: number;
   noiseThresholdDb: number;
   isThresholdLocked: boolean;
-  batteryLevel: number;
+  batteryLevel: number | null;
   isImpactTriggered: boolean;
   isNoiseTriggered: boolean;
-  setTelemetryData: (data: { impactG?: number; noiseDb?: number; batteryLevel?: number }) => void;
+  setTelemetryData: (data: { impactG?: number; noiseDb?: number | null; batteryLevel?: number | null }) => void;
   setImpactThreshold: (threshold: number) => void;
   setNoiseThreshold: (threshold: number) => void;
   toggleThresholdLock: () => void;
@@ -17,12 +22,12 @@ interface TelemetryState {
 }
 
 export const useTelemetryStore = create<TelemetryState>((set, get) => ({
-  currentImpactG: 1.0,
-  currentNoiseDb: 42,
+  currentImpactG: 1.0, // resting gravity until the first accelerometer sample
+  currentNoiseDb: null,
   impactThresholdG: 3.5, // 3.5G sudden shock/impact
   noiseThresholdDb: 88, // 88dB sudden collapse/explosion sound
   isThresholdLocked: true, // Locked by default to prevent pocket touches
-  batteryLevel: 92,
+  batteryLevel: null,
   isImpactTriggered: false,
   isNoiseTriggered: false,
 
@@ -32,15 +37,12 @@ export const useTelemetryStore = create<TelemetryState>((set, get) => ({
     const noiseDb = data.noiseDb !== undefined ? data.noiseDb : state.currentNoiseDb;
     const batteryLevel = data.batteryLevel !== undefined ? data.batteryLevel : state.batteryLevel;
 
-    const isImpactTriggered = impactG >= state.impactThresholdG;
-    const isNoiseTriggered = noiseDb >= state.noiseThresholdDb;
-
     set({
       currentImpactG: Number(impactG.toFixed(2)),
-      currentNoiseDb: Math.round(noiseDb),
+      currentNoiseDb: noiseDb === null ? null : Math.round(noiseDb),
       batteryLevel,
-      isImpactTriggered,
-      isNoiseTriggered,
+      isImpactTriggered: impactG >= state.impactThresholdG,
+      isNoiseTriggered: noiseDb !== null && noiseDb >= state.noiseThresholdDb,
     });
   },
 
